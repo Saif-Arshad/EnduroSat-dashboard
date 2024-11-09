@@ -35,13 +35,8 @@ import {
 } from '@/components/ui/sidebar';
 import { navItems } from '@/constants/data';
 import {
-  BadgeCheck,
-  Bell,
   ChevronRight,
-  ChevronsUpDown,
-  CreditCard,
-  GalleryVerticalEnd,
-  LogOut
+  Rocket
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -54,9 +49,9 @@ import ThemeToggle from './ThemeToggle/theme-toggle';
 import { UserNav } from './user-nav';
 
 export const company = {
-  name: 'Acme Inc',
-  logo: GalleryVerticalEnd,
-  plan: 'Enterprise'
+  name: 'Space Info',
+  logo: Rocket,
+  // plan: 'Enterprise'
 };
 
 export default function AppSidebar({
@@ -72,20 +67,19 @@ export default function AppSidebar({
   }, []);
 
   if (!mounted) {
-    return null; 
+    return null;
   }
 
   return (
     <SidebarProvider>
       <Sidebar collapsible="icon">
         <SidebarHeader>
-          <div className="flex gap-2 py-2 text-sidebar-accent-foreground ">
+          <div className="flex items-center gap-2 py-2 text-sidebar-accent-foreground ">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
               <company.logo className="size-4" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">{company.name}</span>
-              <span className="truncate text-xs">{company.plan}</span>
             </div>
           </div>
         </SidebarHeader>
@@ -150,7 +144,30 @@ export default function AppSidebar({
           </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-          <SidebarMenu>
+          <SidebarMenuButton
+            size="lg"
+            className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+          >
+            <Avatar className="h-8 w-8 rounded-lg">
+              <AvatarImage
+                src={session?.user?.image || ''}
+                alt={session?.user?.name || ''}
+              />
+              <AvatarFallback className="rounded-lg">
+                {session?.user?.name?.slice(0, 2)?.toUpperCase() ||
+                  'CN'}
+              </AvatarFallback>
+            </Avatar>
+            <div className="grid flex-1 text-left text-sm leading-tight">
+              <span className="truncate font-semibold">
+                {session?.user?.name || ''}
+              </span>
+              <span className="truncate text-xs">
+                {session?.user?.email || ''}
+              </span>
+            </div>
+          </SidebarMenuButton>
+          {/* <SidebarMenu>
             <SidebarMenuItem>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -232,7 +249,7 @@ export default function AppSidebar({
                 </DropdownMenuContent>
               </DropdownMenu>
             </SidebarMenuItem>
-          </SidebarMenu>
+          </SidebarMenu> */}
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>
