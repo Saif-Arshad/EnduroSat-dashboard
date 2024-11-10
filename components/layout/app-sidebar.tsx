@@ -44,7 +44,6 @@ import { usePathname } from 'next/navigation';
 import * as React from 'react';
 import { Breadcrumbs } from '../breadcrumbs';
 import { Icons } from '../icons';
-import SearchInput from '../search-input';
 import ThemeToggle from './ThemeToggle/theme-toggle';
 import { UserNav } from './user-nav';
 
@@ -78,9 +77,9 @@ export default function AppSidebar({
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
               <company.logo className="size-4" />
             </div>
-            <div className="grid flex-1 text-left text-sm leading-tight">
+            {/* <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">{company.name}</span>
-            </div>
+            </div> */}
           </div>
         </SidebarHeader>
         <SidebarContent className="overflow-x-hidden">

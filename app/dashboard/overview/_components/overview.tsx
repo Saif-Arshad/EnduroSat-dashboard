@@ -1,5 +1,6 @@
 import { AreaGraph } from './area-graph';
 import { BarGraph } from './bar-graph';
+import SatelliteInfoCard from './InfoCard';
 import MyInteractiveBarChart from './Line-Graph';
 import { PieGraph } from './pie-graph';
 import PageContainer from '@/components/layout/page-container';
@@ -16,7 +17,7 @@ export default function OverViewPage() {
       <div className="space-y-5">
         <div className="flex items-center justify-between space-y-2 mb-6">
           <h2 className="text-2xl font-bold tracking-tight">
-            Hi, Welcome back 👋
+            Hi, Welcome 👋
           </h2>
         </div>
 
@@ -123,7 +124,7 @@ export default function OverViewPage() {
             </CardContent>
           </Card>
         </div>
-
+        {/* <SatelliteInfoCard /> */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
           <div className="col-span-8">
             <BarGraph />
