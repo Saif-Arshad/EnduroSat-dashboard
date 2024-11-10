@@ -1,5 +1,7 @@
 import { AreaGraph } from './area-graph';
 import { BarGraph } from './bar-graph';
+import MyInteractiveBarChart from './Line-Graph';
+import MyLineChart from './Line-Graph';
 import { PieGraph } from './pie-graph';
 import PageContainer from '@/components/layout/page-container';
 import {
@@ -128,11 +130,14 @@ export default function OverViewPage() {
             <BarGraph />
           </div>
 
-          <div className="col-span-8">
+          <div className="col-span-4">
             <AreaGraph />
           </div>
-          <div className="col-span-4 md:col-span-8">
+          <div className="col-span-4 md:col-span-4">
             <PieGraph />
+          </div>
+          <div className="col-span-4 md:col-span-8">
+            <MyInteractiveBarChart />
           </div>
         </div>
       </div>

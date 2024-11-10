@@ -19,7 +19,7 @@ const authConfig = {
       async authorize(credentials, req) {
         const user = {
           id: '1',
-          name: 'John',
+          name: 'Demo',
           email: credentials?.email as string
         };
         if (user) {
@@ -32,7 +32,7 @@ const authConfig = {
     })
   ],
   pages: {
-    signIn: '/' //sigin page
+    signIn: '/'
   }
 } satisfies NextAuthConfig;
 
