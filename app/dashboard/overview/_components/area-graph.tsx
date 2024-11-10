@@ -1,4 +1,4 @@
-'use client';
+"use client"
 
 import { TrendingUp } from 'lucide-react';
 import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
@@ -17,22 +17,24 @@ import {
   ChartTooltip,
   ChartTooltipContent
 } from '@/components/ui/chart';
+
+// Updated chart data to reflect satellite metrics
 const chartData = [
-  { month: 'January', desktop: 186, mobile: 80 },
-  { month: 'February', desktop: 305, mobile: 200 },
-  { month: 'March', desktop: 237, mobile: 120 },
-  { month: 'April', desktop: 73, mobile: 190 },
-  { month: 'May', desktop: 209, mobile: 130 },
-  { month: 'June', desktop: 214, mobile: 140 }
+  { month: 'January', bandwidth: 186, solarEnergy: 80 },
+  { month: 'February', bandwidth: 305, solarEnergy: 200 },
+  { month: 'March', bandwidth: 237, solarEnergy: 120 },
+  { month: 'April', bandwidth: 73, solarEnergy: 190 },
+  { month: 'May', bandwidth: 209, solarEnergy: 130 },
+  { month: 'June', bandwidth: 214, solarEnergy: 140 }
 ];
 
 const chartConfig = {
-  desktop: {
-    label: 'Desktop',
+  bandwidth: {
+    label: 'Bandwidth Usage (Gbps)',
     color: 'hsl(var(--chart-1))'
   },
-  mobile: {
-    label: 'Mobile',
+  solarEnergy: {
+    label: 'Solar Energy Collected (kWh)',
     color: 'hsl(var(--chart-2))'
   }
 } satisfies ChartConfig;
@@ -41,9 +43,9 @@ export function AreaGraph() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Aryabhata - Kapustin Yar</CardTitle>
+        <CardTitle>Monthly Satellite Metrics</CardTitle>
         <CardDescription>
-          Conducted experimental studies on solar irradiance
+          Monthly tracking of bandwidth and solar energy collection
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -72,19 +74,19 @@ export function AreaGraph() {
               content={<ChartTooltipContent indicator="dot" />}
             />
             <Area
-              dataKey="mobile"
+              dataKey="solarEnergy"
               type="natural"
-              fill="var(--color-mobile)"
+              fill="var(--color-solarEnergy)"
               fillOpacity={0.4}
-              stroke="var(--color-mobile)"
+              stroke="var(--color-solarEnergy)"
               stackId="a"
             />
             <Area
-              dataKey="desktop"
+              dataKey="bandwidth"
               type="natural"
-              fill="var(--color-desktop)"
+              fill="var(--color-bandwidth)"
               fillOpacity={0.4}
-              stroke="var(--color-desktop)"
+              stroke="var(--color-bandwidth)"
               stackId="a"
             />
           </AreaChart>

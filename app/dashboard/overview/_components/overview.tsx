@@ -1,7 +1,6 @@
 import { AreaGraph } from './area-graph';
 import { BarGraph } from './bar-graph';
 import MyInteractiveBarChart from './Line-Graph';
-import MyLineChart from './Line-Graph';
 import { PieGraph } from './pie-graph';
 import PageContainer from '@/components/layout/page-container';
 import {
@@ -14,19 +13,18 @@ import {
 export default function OverViewPage() {
   return (
     <PageContainer scrollable>
-      <div className="space-y-2">
+      <div className="space-y-5">
         <div className="flex items-center justify-between space-y-2 mb-6">
           <h2 className="text-2xl font-bold tracking-tight">
             Hi, Welcome back 👋
           </h2>
-
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total
+                Total Satellites
               </CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,16 +40,16 @@ export default function OverViewPage() {
               </svg>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">45,231.89</div>
+              <div className="text-2xl font-bold">2,431</div>
               <p className="text-xs text-muted-foreground">
-                +20.1% from last month
+                +5.1% from last month
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                This month
+                New Launches
               </CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -69,15 +67,15 @@ export default function OverViewPage() {
               </svg>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+2350</div>
+              <div className="text-2xl font-bold">18</div>
               <p className="text-xs text-muted-foreground">
-                +180.1% from last month
+                +12% from last month
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Space</CardTitle>
+              <CardTitle className="text-sm font-medium">Data Collected</CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -93,16 +91,16 @@ export default function OverViewPage() {
               </svg>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+12,234</div>
+              <div className="text-2xl font-bold">5.4 TB</div>
               <p className="text-xs text-muted-foreground">
-                +19% from last month
+                +30% from last month
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Now
+                Real-time Tracking
               </CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -118,13 +116,14 @@ export default function OverViewPage() {
               </svg>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+573</div>
+              <div className="text-2xl font-bold">320</div>
               <p className="text-xs text-muted-foreground">
-                +201 since last hour
+                +50 active targets
               </p>
             </CardContent>
           </Card>
         </div>
+
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
           <div className="col-span-8">
             <BarGraph />
