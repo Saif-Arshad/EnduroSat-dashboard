@@ -1,4 +1,5 @@
 export const images = [
+
     { id: 1, url: "/Images/1.jpg", title: "Galactic Sunrise" },
     { id: 2, url: "/Images/2.jpg", title: "Nebula Dreams" },
     { id: 3, url: "/Images/3.jpg", title: "Cosmic Clouds" },
