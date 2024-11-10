@@ -130,13 +130,13 @@ export default function OverViewPage() {
             <BarGraph />
           </div>
 
-          <div className="col-span-4">
+          <div className="col-span-8 md:col-span-4">
             <AreaGraph />
           </div>
-          <div className="col-span-4 md:col-span-4">
+          <div className="col-span-8 md:col-span-4">
             <PieGraph />
           </div>
-          <div className="col-span-4 md:col-span-8">
+          <div className="col-span-8">
             <MyInteractiveBarChart />
           </div>
         </div>
