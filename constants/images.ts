@@ -1,28 +1,54 @@
-export const images = [
+import img02 from './Images/2.jpg';
+import img03 from './Images/3.jpg';
+import img04 from './Images/4.jpg';
+import img05 from './Images/5.jpeg';
+import img06 from './Images/6.jpeg';
+import img07 from './Images/7.jpeg';
+import img08 from './Images/8.jpeg';
+import img09 from './Images/9.jpeg';
+import img10 from './Images/10.jpeg';
+import img11 from './Images/11.jpeg';
+import img12 from './Images/12.jpeg';
+import img13 from './Images/13.jpeg';
+import img14 from './Images/14.jpeg';
+import img15 from './Images/15.jpeg';
+import img16 from './Images/16.jpeg';
+import img17 from './Images/17.jpeg';
+import img18 from './Images/18.jpeg';
+import img19 from './Images/19.jpeg';
+import img20 from './Images/20.jpeg';
+import img21 from './Images/21.jpeg';
+import img22 from './Images/22.jpeg';
+import img23 from './Images/23.jpeg';
+import img24 from './Images/24.jpeg';
+import img25 from './Images/25.jpeg';
 
-    { id: 1, url: "/Images/1.jpg", title: "Galactic Sunrise" },
-    { id: 2, url: "/Images/2.jpg", title: "Nebula Dreams" },
-    { id: 3, url: "/Images/3.jpg", title: "Cosmic Clouds" },
-    { id: 4, url: "/Images/4.jpg", title: "Celestial Spheres" },
-    { id: 5, url: "/Images/5.jpeg", title: "Stellar Winds" },
-    { id: 6, url: "/Images/6.jpeg", title: "Asteroid Fields" },
-    { id: 7, url: "/Images/7.jpeg", title: "Galactic Core" },
-    { id: 8, url: "/Images/8.jpeg", title: "Solar Flare" },
-    { id: 9, url: "/Images/9.jpeg", title: "Lunar Landscape" },
-    { id: 10, url: "/Images/10.jpeg", title: "Comet Trails" },
-    { id: 11, url: "/Images/11.jpeg", title: "Supernova Blast" },
-    { id: 12, url: "/Images/12.jpeg", title: "The Milky Way" },
-    { id: 13, url: "/Images/13.jpeg", title: "Ringed Planet" },
-    { id: 14, url: "/Images/14.jpeg", title: "Meteor Shower" },
-    { id: 15, url: "/Images/15.jpeg", title: "Deep Space" },
-    { id: 16, url: "/Images/16.jpeg", title: "Interstellar Clouds" },
-    { id: 17, url: "/Images/17.jpeg", title: "Eclipse View" },
-    { id: 18, url: "/Images/18.jpeg", title: "Frozen Moon" },
-    { id: 19, url: "/Images/19.jpeg", title: "Binary Stars" },
-    { id: 20, url: "/Images/20.jpeg", title: "Galactic Edge" },
-    { id: 21, url: "/Images/21.jpeg", title: "The Red Planet" },
-    { id: 22, url: "/Images/22.jpeg", title: "Alien Sunset" },
-    { id: 23, url: "/Images/23.jpeg", title: "Space Horizon" },
-    { id: 24, url: "/Images/24.jpeg", title: "Black Hole" },
-    { id: 25, url: "/Images/25.jpeg", title: "Astral Glow" }
+
+
+export const images = [
+    { id: 1, url: "/static/images/1.jpg", title: "Galactic Sunrise" },
+    { id: 2, url: img02, title: "Nebula Dreams" },
+    { id: 3, url: img03, title: "Cosmic Clouds" },
+    { id: 4, url: img04, title: "Celestial Spheres" },
+    { id: 5, url: img05, title: "Stellar Winds" },
+    { id: 6, url: img06, title: "Asteroid Fields" },
+    { id: 7, url: img07, title: "Galactic Core" },
+    { id: 8, url: img08, title: "Solar Flare" },
+    { id: 9, url: img09, title: "Lunar Landscape" },
+    { id: 10, url: img10, title: "Comet Trails" },
+    { id: 11, url: img11, title: "Supernova Blast" },
+    { id: 12, url: img12, title: "The Milky Way" },
+    { id: 13, url: img13, title: "Ringed Planet" },
+    { id: 14, url: img14, title: "Meteor Shower" },
+    { id: 15, url: img15, title: "Deep Space" },
+    { id: 16, url: img16, title: "Interstellar Clouds" },
+    { id: 17, url: img17, title: "Eclipse View" },
+    { id: 18, url: img18, title: "Frozen Moon" },
+    { id: 19, url: img19, title: "Binary Stars" },
+    { id: 20, url: img20, title: "Galactic Edge" },
+    { id: 21, url: img21, title: "The Red Planet" },
+    { id: 22, url: img22, title: "Alien Sunset" },
+    { id: 23, url: img23, title: "Space Horizon" },
+    { id: 24, url: img24, title: "Black Hole" },
+    { id: 25, url: img25, title: "Astral Glow" }
 ];
