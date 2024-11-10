@@ -41,9 +41,9 @@ export function AreaGraph() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Area Chart - Stacked</CardTitle>
+        <CardTitle>Aryabhata - Kapustin Yar</CardTitle>
         <CardDescription>
-          Showing total visitors for the last 6 months
+          Conducted experimental studies on solar irradiance
         </CardDescription>
       </CardHeader>
       <CardContent>

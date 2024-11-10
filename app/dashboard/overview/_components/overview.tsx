@@ -2,11 +2,9 @@ import { AreaGraph } from './area-graph';
 import { BarGraph } from './bar-graph';
 import { PieGraph } from './pie-graph';
 import PageContainer from '@/components/layout/page-container';
-import { RecentSales } from './recent-sales';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
@@ -26,7 +24,7 @@ export default function OverViewPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Revenue
+                Total
               </CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +40,7 @@ export default function OverViewPage() {
               </svg>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$45,231.89</div>
+              <div className="text-2xl font-bold">45,231.89</div>
               <p className="text-xs text-muted-foreground">
                 +20.1% from last month
               </p>
@@ -51,7 +49,7 @@ export default function OverViewPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Subscriptions
+                This month
               </CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -77,7 +75,7 @@ export default function OverViewPage() {
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Sales</CardTitle>
+              <CardTitle className="text-sm font-medium">Space</CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -102,7 +100,7 @@ export default function OverViewPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Active Now
+                Now
               </CardTitle>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -126,24 +124,14 @@ export default function OverViewPage() {
           </Card>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
-          <div className="col-span-4">
+          <div className="col-span-8">
             <BarGraph />
           </div>
-          <Card className="col-span-4 md:col-span-3">
-            <CardHeader>
-              <CardTitle>Recent Sales</CardTitle>
-              <CardDescription>
-                You made 265 sales this month.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RecentSales />
-            </CardContent>
-          </Card>
-          <div className="col-span-4">
+
+          <div className="col-span-8">
             <AreaGraph />
           </div>
-          <div className="col-span-4 md:col-span-3">
+          <div className="col-span-4 md:col-span-8">
             <PieGraph />
           </div>
         </div>

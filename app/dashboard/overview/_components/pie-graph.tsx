@@ -60,8 +60,8 @@ export function PieGraph() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Sputnik 1 - Donut with Text</CardTitle>
+        <CardDescription>Exploitation of Meteorological Satellites</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -118,7 +118,7 @@ export function PieGraph() {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          geostationary meteorological satellites
         </div>
       </CardFooter>
     </Card>
