@@ -30,6 +30,7 @@ import {
   UserCircle2Icon,
   UserPen,
   UserX2Icon,
+  Images,
   X
 } from 'lucide-react';
 
@@ -37,6 +38,7 @@ export type Icon = LucideIcon;
 
 export const Icons = {
   dashboard: LayoutDashboardIcon,
+  image: Images,
   logo: Command,
   login: LogIn,
   close: X,

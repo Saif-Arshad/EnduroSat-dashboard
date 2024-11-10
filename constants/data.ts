@@ -129,13 +129,13 @@ export const navItems: NavItem[] = [
     isActive: false,
     items: []
   },
-  // {
-  //   title: 'Employee',
-  //   url: '/dashboard/employee',
-  //   icon: 'user',
-  //   isActive: false,
-  //   items: [] // No child items
-  // },
+  {
+    title: 'Image Gallery',
+    url: '/dashboard/info',
+    icon: 'image',
+    isActive: false,
+    items: []
+  },
   // {
   //   title: 'Product',
   //   url: '/dashboard/product',
