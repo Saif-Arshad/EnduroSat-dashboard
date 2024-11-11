@@ -130,7 +130,7 @@ export const navItems: NavItem[] = [
     items: []
   },
   {
-    title: 'Image Gallery',
+    title: 'Images',
     url: '/dashboard/info',
     icon: 'image',
     isActive: false,
