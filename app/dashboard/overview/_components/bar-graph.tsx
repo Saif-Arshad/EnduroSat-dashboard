@@ -1,145 +1,240 @@
-"use client"
+"use client";
 
-import * as React from 'react';
-import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
+import React, { useState, useMemo } from "react";
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import { saveAs } from "file-saver";
+import { parse } from "date-fns";
 
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+  CardTitle,
+} from "@/components/ui/card";
+
 import {
   ChartConfig,
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent
-} from '@/components/ui/chart';
+  ChartTooltipContent,
+} from "@/components/ui/chart";
 
-export const description = 'An interactive bar chart';
+import data from "../../../../constants/MySat-1_Beacon_data_sample.json";
 
-const chartData = [
-  { date: '2024-01', Acrimsat: 5, RohiniRS_D1: 3 },
-  { date: '2024-02', Acrimsat: 2, RohiniRS_D1: 4 },
-  { date: '2024-03', Acrimsat: 6, RohiniRS_D1: 2 },
-  { date: '2024-04', Acrimsat: 7, RohiniRS_D1: 5 },
-  { date: '2024-05', Acrimsat: 8, RohiniRS_D1: 3 },
-  { date: '2024-06', Acrimsat: 4, RohiniRS_D1: 6 },
-  { date: '2024-07', Acrimsat: 3, RohiniRS_D1: 5 },
-  { date: '2024-08', Acrimsat: 7, RohiniRS_D1: 4 },
-  { date: '2024-09', Acrimsat: 8, RohiniRS_D1: 3 },
-  { date: '2024-10', Acrimsat: 5, RohiniRS_D1: 7 },
-  { date: '2024-11', Acrimsat: 6, RohiniRS_D1: 2 },
-  { date: '2024-12', Acrimsat: 4, RohiniRS_D1: 6 },
-  { date: '2025-01', Acrimsat: 5, RohiniRS_D1: 4 },
-  { date: '2025-02', Acrimsat: 3, RohiniRS_D1: 5 },
-  { date: '2025-03', Acrimsat: 7, RohiniRS_D1: 3 },
-  { date: '2025-04', Acrimsat: 8, RohiniRS_D1: 6 },
-  { date: '2025-05', Acrimsat: 4, RohiniRS_D1: 5 },
-  { date: '2025-06', Acrimsat: 3, RohiniRS_D1: 4 },
-  { date: '2025-07', Acrimsat: 6, RohiniRS_D1: 7 },
-  { date: '2025-08', Acrimsat: 8, RohiniRS_D1: 2 },
-  { date: '2025-09', Acrimsat: 5, RohiniRS_D1: 3 },
-  { date: '2025-10', Acrimsat: 7, RohiniRS_D1: 6 },
-  { date: '2025-11', Acrimsat: 3, RohiniRS_D1: 5 },
-  { date: '2025-12', Acrimsat: 8, RohiniRS_D1: 4 }
-];
+// Choose which date field to parse: 'Timestamp' or 'OBC_time'
+const DATE_FIELD = "Timestamp"; // Change to "OBC_time" if needed
 
+// Preprocess the data to include the chosen date field as milliseconds since epoch
+const processedData = data
+  .map((item, index) => {
+    const dateString = item[DATE_FIELD];
+    const parsedDate = parse(dateString, "M/d/yyyy H:mm:ss", new Date());
+
+    // Validate date parsing
+    if (isNaN(parsedDate.getTime())) {
+      console.error(`Invalid date at index ${index}: ${dateString}`);
+      return null; // Exclude this item from processedData
+    }
+
+    // Parse temperature fields and ensure they are numbers
+    // @ts-ignore
+    const OBC_temp = parseFloat(item.OBC_temp);
+    // @ts-ignore
+    const EPS_battery_temp = parseFloat(item.EPS_battery_temp);
+
+    if (isNaN(OBC_temp) || isNaN(EPS_battery_temp)) {
+      console.error(
+        `Invalid temperature at index ${index}: OBC_temp=${item.OBC_temp}, EPS_battery_temp=${item.EPS_battery_temp}`
+      );
+      return null; // Exclude this item from processedData
+    }
+
+    return {
+      ...item,
+      date: parsedDate.getTime(), // Convert Date to timestamp
+      OBC_temp,
+      EPS_battery_temp,
+    };
+  })
+  .filter((item) => item !== null); // Remove invalid items
+
+console.log("Total data points:", data.length);
+console.log("Valid processed data points:", processedData.length);
 
 const chartConfig = {
   views: {
-    label: 'Satellite Launches'
+    label: "Satellite Data",
   },
-  Acrimsat: {
-    label: 'Acrimsat Launches',
-    color: 'hsl(var(--chart-1))'
+  OBC_temp: {
+    label: "OBC Temperature",
+    color: "#8884d8", // Example color
   },
-  RohiniRS_D1: {
-    label: 'Rohini RS-D1 Launches',
-    color: 'hsl(var(--chart-2))'
-  }
+  EPS_battery_temp: {
+    label: "Battery Temperature",
+    color: "#82ca9d", // Example color
+  },
 } satisfies ChartConfig;
 
-export function BarGraph() {
-  const [activeChart, setActiveChart] = React.useState<keyof typeof chartConfig>('Acrimsat');
-
-  const total = React.useMemo(() => ({
-    Acrimsat: chartData.reduce((acc, curr) => acc + curr.Acrimsat, 0),
-    RohiniRS_D1: chartData.reduce((acc, curr) => acc + curr.RohiniRS_D1, 0)
-  }),
-    []
+export function SatelliteLineChart() {
+  const [activeChart, setActiveChart] = useState<keyof typeof chartConfig>(
+    "OBC_temp"
   );
+  const [selectedMonth, setSelectedMonth] = useState<string>(() => {
+    // Set default to the first month in the data
+    if (processedData.length > 0) {
+      const date = new Date(processedData[0].date);
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      return `${year}-${month}`;
+    }
+    return "";
+  });
+
+  // Memoize the filtered data for performance
+  const filteredData = useMemo(() => {
+    if (!selectedMonth) return [];
+
+    const [year, month] = selectedMonth.split("-").map(Number);
+
+    const result = processedData
+      .filter((item) => {
+        const date = new Date(item.date); // Convert timestamp back to Date for comparison
+        const yearMatch = date.getFullYear() === year;
+        const monthMatch = date.getMonth() + 1 === month;
+        return yearMatch && monthMatch;
+      })
+      .sort((a, b) => a.date - b.date); // Sort by date ascending
+
+    console.log(
+      `Filtered Data for ${selectedMonth}:`,
+      result.length > 0 ? result.slice(0, 5) : "No data"
+    );
+    // Log first 5 entries
+    return result;
+  }, [selectedMonth]);
+
+  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedMonth(e.target.value);
+  };
+
+  const exportToCSV = () => {
+    if (filteredData.length === 0) {
+      alert("No data to export for the selected month.");
+      return;
+    }
+
+    const csvContent = [
+      ["Date", "OBC Temperature", "Battery Temperature"],
+      ...filteredData.map((row: any) => [
+        new Date(row.date).toISOString().split("T")[0],
+        row.OBC_temp,
+        row.EPS_battery_temp,
+      ]),
+    ]
+      .map((e) => e.join(","))
+      .join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    saveAs(blob, `satellite_data_${selectedMonth}.csv`);
+  };
 
   return (
     <Card>
       <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
         <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Kompsat-3A - Sputnik 1</CardTitle>
+          <CardTitle>Satellite Data Chart</CardTitle>
           <CardDescription>
-            Density of high atmospheric layers
+            Temperature data with customizable date filters.
           </CardDescription>
         </div>
-        <div className="flex">
-          {['Acrimsat', 'RohiniRS_D1'].map((key) => {
-            const chart = key as keyof typeof chartConfig;
-            return (
-              <button
-                key={chart}
-                data-active={activeChart === chart}
-                className="relative flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
-                onClick={() => setActiveChart(chart)}
-              >
-                <span className="text-xs text-muted-foreground">
+        <div className="flex space-x-2 px-6 py-4">
+          {Object.keys(chartConfig)
+            .filter((key) => key !== "views")
+            .map((key) => {
+              const chart = key as keyof typeof chartConfig;
+              return (
+                <button
+                  key={chart}
+                  data-active={activeChart === chart}
+                  className={`px-4 py-2 rounded-lg ${activeChart === chart
+                    ? "bg-blue-500 text-white dark:bg-blue-800"
+                    : "bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-white"
+                    }`}
+                  onClick={() => setActiveChart(chart)}
+                >
                   {chartConfig[chart].label}
-                </span>
-                <span className="text-lg font-bold leading-none sm:text-3xl">
-                  {total[key as keyof typeof total].toLocaleString()}
-                </span>
-              </button>
-            );
-          })}
+                </button>
+              );
+            })}
         </div>
       </CardHeader>
-      <CardContent className="px-2 sm:p-6">
-        <ChartContainer
-          config={chartConfig}
-          className="aspect-auto h-[280px] w-full"
-        >
-          <BarChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12
-            }}
+      <CardContent className="px-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 space-y-2 sm:space-y-0">
+          <div className="flex items-center space-x-4">
+            <label className="flex items-center">
+              Select Month:
+              <input
+                type="month"
+                value={selectedMonth}
+                onChange={handleMonthChange}
+                className="ml-2 p-1 border rounded"
+              />
+            </label>
+          </div>
+          <button
+            onClick={exportToCSV}
+            className="px-4 py-2 bg-green-500 rounded-lg text-white text-sm hover:bg-green-600"
           >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="date"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.substring(5)}
-            />
-            <ChartTooltip
-              content={
-                <ChartTooltipContent
-                  className="w-[150px]"
-                  nameKey="views"
-                  labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString('en-US', {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric'
-                    });
+            Export to CSV
+          </button>
+        </div>
+        {filteredData.length === 0 ? (
+          <p>No data available for the selected month.</p>
+        ) : (
+          <div className="dark:text-black">
+            <ResponsiveContainer width="100%" height={400}>
+              <LineChart data={filteredData}>
+                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                <XAxis
+                  dataKey="date"
+                  tickFormatter={(timestamp) =>
+                    new Date(timestamp).toLocaleDateString()
+                  }
+                  type="number"
+                  domain={["dataMin", "dataMax"]}
+                  scale="time"
+                />
+                <YAxis
+                  label={{
+                    value: "Temperature (°C)",
+                    angle: -90,
+                    position: "insideLeft",
                   }}
                 />
-              }
-            />
-            <Bar dataKey={activeChart} fill={`var(--color-${activeChart})`} />
-          </BarChart>
-        </ChartContainer>
+                <Tooltip
+                  labelFormatter={(value) =>
+                    new Date(value).toLocaleDateString()
+                  }
+                />
+                <Line
+                  type="monotone"
+                  dataKey={activeChart}
+                  // @ts-ignore
+                  stroke={chartConfig[activeChart].color}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
