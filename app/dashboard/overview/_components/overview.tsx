@@ -10,12 +10,7 @@ import PageContainer from '@/components/layout/page-container';
 
 
 export default function OverViewPage() {
-  const [selectedDate, setSelectedDate] = useState(null);
 
-  const handleDateChange = (date: any) => {
-    setSelectedDate(date);
-    // onFilterChange(date);
-  };
 
   return (
     <PageContainer scrollable>
@@ -24,19 +19,7 @@ export default function OverViewPage() {
           <h2 className="text-2xl font-bold tracking-tight">
             Hi, Welcome 👋
           </h2>
-          <div className='flex items-center'>
-            Filters
-            <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Select Date</label>
-              <DatePicker
-                selected={selectedDate}
-                onChange={handleDateChange}
-                dateFormat="dd/MM/yyyy"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                placeholderText="Select day, month, year"
-              />
-            </div>
-          </div>
+
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7">
           <div className="col-span-8">
