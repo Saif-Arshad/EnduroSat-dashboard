@@ -69,11 +69,11 @@ const chartConfig = {
   },
   OBC_temp: {
     label: "OBC Temperature",
-    color: "#8884d8", // Example color
+    color: "#ff7300",
   },
   EPS_battery_temp: {
     label: "Battery Temperature",
-    color: "#82ca9d", // Example color
+    color: "#ff7300",
   },
 } satisfies ChartConfig;
 
@@ -82,7 +82,6 @@ export function SatelliteLineChart() {
     "OBC_temp"
   );
   const [selectedMonth, setSelectedMonth] = useState<string>(() => {
-    // Set default to the first month in the datax
     // @ts-ignore
     if (processedData.length > 0) {
       // @ts-ignore
@@ -204,7 +203,7 @@ export function SatelliteLineChart() {
           <p>No data available for the selected month.</p>
         ) : (
           <div className="dark:text-black">
-            <ResponsiveContainer width="100%" height={400}>
+            <ResponsiveContainer width="100%" height={200}>
               <LineChart data={filteredData}>
                 <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                 <XAxis
