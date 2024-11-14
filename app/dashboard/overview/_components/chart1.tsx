@@ -25,7 +25,7 @@ export default function ApparentWindSpeedChart() {
     return (
         <Card>
             <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-                <CardTitle>Apparent Wind Speed</CardTitle>
+                <CardTitle>Apparent  Speed</CardTitle>
             </div>
             <div className="w-full h-">
                 <ResponsiveContainer width="100%" height={300}>

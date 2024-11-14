@@ -67,11 +67,8 @@ export default function OverViewPage() {
           ))}
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7 my-6">
-          <div className="col-span-8 md:col-span-4">
+          <div className="col-span-8">
             <SatelliteLineChart />
-          </div>
-          <div className="col-span-8 md:col-span-4">
-            <ApparentWindSpeedChart />
           </div>
           <div className="col-span-8 md:col-span-4">
             <AreaGraph />
@@ -79,9 +76,13 @@ export default function OverViewPage() {
           <div className="col-span-8 md:col-span-4">
             <PieGraph />
           </div>
-          <div className="col-span-8">
+
+          <div className="col-span-4">
 
             <MyInteractiveBarChart />
+          </div>
+          <div className="col-span-8 md:col-span-4">
+            <ApparentWindSpeedChart />
           </div>
         </div>
       </div>
