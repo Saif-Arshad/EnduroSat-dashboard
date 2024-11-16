@@ -61,11 +61,9 @@ export default function OverViewPage() {
       <div className="py-5 ">
 
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-col-3 xl:grid-col-4 2xl:grid-col-5 gap-4">
-          {cardsData.map((item, index) => (
-            <Card key={index} title={item.title} value={item.value} chartData={item.chartData} />
-          ))}
-        </div>
+
+        <Card />
+
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7 my-6">
           <div className="col-span-8">
             <SatelliteLineChart />
@@ -81,7 +79,7 @@ export default function OverViewPage() {
 
             <MyInteractiveBarChart />
           </div>
-          <div className="col-span-8 md:col-span-4">
+          <div className="col-span-8">
             <ApparentWindSpeedChart />
           </div>
         </div>

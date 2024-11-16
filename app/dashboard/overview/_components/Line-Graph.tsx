@@ -1,22 +1,31 @@
 "use client";
 
 import React, { useState } from 'react';
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer
-} from 'recharts';
-import data from '../../../../constants/MySat-1_Beacon_data_sample.json';
+import dynamic from 'next/dynamic';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-const MyStyledLineChart = () => {
-    const pageSize = 145;
+// Dynamically import ApexCharts to support SSR with Next.js
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+
+// Static Dummy Data for Testing
+const generateDummyData = () => {
+    const data = [];
+    let date = new Date('2024-11-13T07:00:00');
+    for (let i = 0; i < 50; i++) {
+        data.push({
+            Timestamp: date.toISOString(),
+            Vbatt: Math.floor(Math.random() * 150) + 50, // Random IN values between 50 and 200
+            VTRXVU: Math.floor(Math.random() * -150) - 50, // Random OUT values between -50 and -200
+        });
+        date.setHours(date.getHours() + 1); // Increment each data point by 1 hour
+    }
+    return data;
+};
+
+const MyStyledMixedChart = () => {
+    const data = generateDummyData();
+    const pageSize = 50;
     const [pageIndex, setPageIndex] = useState(0);
     const numberOfPages = Math.ceil(data.length / pageSize);
 
@@ -28,64 +37,76 @@ const MyStyledLineChart = () => {
         );
     };
 
+    // Prepare the data in the format required by ApexCharts
+    const chartData = {
+        options: {
+            chart: {
+                type: 'line', // This is the overall type, but each series can override it
+                height: 350,
+                toolbar: { show: true },
+                background: '#2e2e2e',
+                foreColor: '#CCCCCC',
+            },
+            colors: ['#4CAF50', '#FFEB3B'], // Colors for IN and OUT
+            dataLabels: { enabled: false },
+            stroke: { curve: 'smooth', width: 2 },
+            fill: {
+                type: 'gradient',
+                gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.8 },
+            },
+            markers: { size: 0 },
+            xaxis: {
+                categories: slicedData.map((item) => item.Timestamp),
+                labels: { format: 'HH:mm' },
+            },
+            yaxis: {
+                min: -200,
+                max: 200,
+                tickAmount: 8,
+                labels: { formatter: (val: any) => `${val} kpps` },
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left',
+                labels: { colors: ['#4CAF50', '#FFEB3B'] },
+            },
+            tooltip: { shared: true, intersect: false },
+            grid: { borderColor: '#555', row: { colors: ['#333', 'transparent'], opacity: 0.1 } },
+        },
+        series: [
+            {
+                name: 'IN',
+                type: 'column', // Column type for bar chart
+                data: slicedData.map((item) => item.Vbatt),
+            },
+            {
+                name: 'OUT',
+                type: 'line', // Line type for line chart
+                data: slicedData.map((item) => item.VTRXVU),
+            },
+        ],
+    };
+
     return (
-        <Card className='my-6'>
-            <CardHeader className="flex items-center justify-between space-y-0 border-b p-0 sm:flex-row">
-                <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-                    <CardTitle>Network Packets</CardTitle>
-                    <CardDescription>
-                        Tracking Inbound and Outbound Packets Over Time
-                    </CardDescription>
-                </div>
-                <div className="flex justify-between items-center pr-4">
-                    <button
-                        onClick={() => navigatePages('prev')}
-                        className="text-white bg-blue-500 hover:bg-blue-600 hover:scale-105 transition-all duration-200 rounded-full p-2 mr-2"
-                    >
-                        <ChevronLeft />
-                    </button>
-                    <button
-                        onClick={() => navigatePages('next')}
-                        className="text-white bg-blue-500 hover:bg-blue-600 hover:scale-105 transition-all duration-200 rounded-full p-2"
-                    >
-                        <ChevronRight />
-                    </button>
-                </div>
-            </CardHeader>
-            <ResponsiveContainer width="100%" height={300} className={"dark:text-black"}>
+        <>
+
+            <div className="px-4 py-4 dark:text-black">
                 {slicedData.length > 0 ? (
-                    <LineChart data={slicedData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="Timestamp" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line
-                            type="monotone"
-                            dataKey="Vbatt"
-                            stroke="#4CAF50"
-                            strokeWidth={2}
-                            dot={false}
-                            name="IN"
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="VTRXVU"
-                            stroke="#FFEB3B"
-                            strokeWidth={2}
-                            dot={false}
-                            name="OUT"
-                        />
-                    </LineChart>
+                    <Chart
+                        // @ts-ignore
+                        options={chartData.options}
+                        series={chartData.series}
+                        type="line"
+                        height={350}
+                    />
                 ) : (
                     <p className="text-center text-gray-500">No data available</p>
                 )}
-            </ResponsiveContainer>
-            <div className="text-center text-sm text-gray-500 m-4">
-                Page {pageIndex + 1} of {numberOfPages}
             </div>
-        </Card>
+
+        </>
+
     );
 };
 
-export default MyStyledLineChart;
+export default MyStyledMixedChart;

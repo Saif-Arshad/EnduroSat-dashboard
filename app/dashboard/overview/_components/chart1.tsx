@@ -1,50 +1,75 @@
 "use client"
-import { Card, CardTitle } from '@/components/ui/card';
+
 import React from 'react';
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    ResponsiveContainer
-} from 'recharts';
+import Chart from 'react-apexcharts';
 
-// Dummy data for the chart
-const data = Array.from({ length: 30 }, (_, i) => ({
-    time: `3/${22 + i} 00:00`,
-    min: Math.random() * 20,
-    max: Math.random() * 40 + 20,
-    avg: Math.random() * 30 + 10,
-    current: Math.random() * 40 + 10
-}));
+const PacketChart = () => {
+    const options = {
+        chart: {
+            type: 'area',
+            height: 350,
+            background: '#2e2e2e',
+            foreColor: '#CCCCCC',
+            toolbar: {
+                show: true,
+            },
+        },
+        colors: ['#4CAF50', '#FFC107'],
+        dataLabels: { enabled: false },
+        stroke: { curve: 'smooth', width: 2 },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.4,
+                opacityTo: 0.8,
+                stops: [0, 90, 100],
+            },
+        },
+        markers: { size: 0 },
+        xaxis: {
+            type: 'datetime',
+            categories: [
+                '2024-11-13T07:00:00',
+                '2024-11-13T12:00:00',
+                '2024-11-13T17:00:00',
+                '2024-11-13T22:00:00',
+                '2024-11-14T03:00:00',
+            ],
+            labels: { format: 'HH:mm' },
+        },
+        yaxis: {
+            min: -200,
+            max: 200,
+            tickAmount: 8,
+            labels: { formatter: (val: any) => `${val} kpps` },
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'left',
+            labels: { colors: ['#4CAF50', '#FFC107'] },
+        },
+        tooltip: { shared: true, intersect: false },
+        grid: { borderColor: '#555', row: { colors: ['#333', 'transparent'], opacity: 0.1 } },
+    };
 
-export default function ApparentWindSpeedChart() {
+    const series = [
+        {
+            name: 'IN',
+            data: [20.9, 50, 80, 150, 99.2],
+        },
+        {
+            name: 'OUT',
+            data: [-30.2, -70, -100, -150, -175.3],
+        },
+    ];
+
     return (
-        <Card>
-            <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-                <CardTitle>Apparent  Speed</CardTitle>
-            </div>
-            <div className="w-full h-">
-                <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={data}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#555" />
-                        <XAxis dataKey="time" tick={{ fill: '#aaa', fontSize: 10 }} />
-                        <YAxis tick={{ fill: '#aaa', fontSize: 10 }} />
-                        <Tooltip
-                            contentStyle={{ backgroundColor: '#333', borderColor: '#444' }}
-                            labelStyle={{ color: '#ddd' }}
-                        />
-                        <Legend wrapperStyle={{ color: '#ddd', fontSize: 12 }} />
-                        <Line type="monotone" dataKey="min" stroke="#82ca9d" strokeWidth={1} dot={false} name="Min" />
-                        <Line type="monotone" dataKey="avg" stroke="#ffc658" strokeWidth={1} dot={false} name="Avg" />
-                        <Line type="monotone" dataKey="max" stroke="#8884d8" strokeWidth={1} dot={false} name="Max" />
-                        <Line type="monotone" dataKey="current" stroke="#ff7300" strokeWidth={1} dot={false} name="Current" />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-        </Card>
+        <div className="chart-container dark:text-black rounded-2xl">
+            {/* @ts-ignore */}
+            <Chart options={options} series={series} type="area" height={350} />
+        </div>
     );
-}
+};
+
+export default PacketChart;

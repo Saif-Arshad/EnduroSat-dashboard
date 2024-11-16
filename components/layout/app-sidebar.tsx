@@ -264,7 +264,7 @@ export default function AppSidebar({
           </div> */}
           <div className="flex items-center gap-2 px-4">
             <UserNav />
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
           </div>
         </header>
         {children}
