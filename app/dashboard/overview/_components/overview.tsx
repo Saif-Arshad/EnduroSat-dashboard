@@ -8,6 +8,8 @@ import { PieGraph } from './pie-graph';
 import PageContainer from '@/components/layout/page-container';
 import Card from './cards';
 import ApparentWindSpeedChart from './chart1';
+import WindSpeedChart from './chart2';
+import HistogramChart from './chart3';
 
 
 export default function OverViewPage() {
@@ -68,18 +70,20 @@ export default function OverViewPage() {
           <div className="col-span-8">
             <SatelliteLineChart />
           </div>
-          <div className="col-span-8 md:col-span-4">
-            <AreaGraph />
-          </div>
-          <div className="col-span-8 md:col-span-4">
-            <PieGraph />
+          <div className="col-span-8 rounded-2xl overflow-hidden">
+            <HistogramChart />
+
           </div>
 
-          <div className="col-span-4">
+          <div className="col-span-4 rounded-2xl overflow-hidden">
 
             <MyInteractiveBarChart />
           </div>
-          <div className="col-span-8">
+          <div className="col-span-4 rounded-2xl overflow-hidden">
+
+            <WindSpeedChart />
+          </div>
+          <div className="col-span-8 rounded-2xl overflow-hidden">
             <ApparentWindSpeedChart />
           </div>
         </div>

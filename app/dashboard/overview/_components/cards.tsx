@@ -52,7 +52,7 @@ const dummyData = {
 
 const chartOptions = {
     chart: {
-        type: 'line',
+        type: 'line' as "line",
         height: 50,
         sparkline: { enabled: true },
     },
@@ -67,8 +67,10 @@ const MetricCard = ({ title, value, data }: any) => (
             <span style={styles.title}>{title}</span>
             <span style={styles.value}>{value}</span>
         </div>
-        {/* // @ts-ignore */}
-        <Chart options={chartOptions} series={[{ data }]} type="line" height={50} />
+        {
+            // @ts-ignore
+            <Chart options={chartOptions} series={[{ data }]} type="line" height={50} />
+        }
     </div>
 );
 
