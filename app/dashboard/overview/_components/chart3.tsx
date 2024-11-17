@@ -54,7 +54,7 @@ const HistogramChart = () => {
     }];
 
     return (
-        // @ts-ignore
+        // @ts-ignorek
         <Chart options={options} series={series} type="bar" height={350} />
     );
 };
