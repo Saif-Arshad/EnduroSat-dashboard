@@ -166,8 +166,13 @@ export default function OverViewPage() {
           <div className="col-span-8">
             <SatelliteLineChart />
           </div>
-          <div className="col-span-8 rounded-2xl overflow-hidden">
+          <div className="col-span-4 rounded-2xl overflow-hidden">
             <HistogramChart />
+
+          </div>
+          <div className="col-span-4 rounded-2xl overflow-hidden">
+            <ApparentWindSpeedChart />
+
 
           </div>
 
@@ -179,20 +184,18 @@ export default function OverViewPage() {
 
             <WindSpeedChart />
           </div>
-          <div className="col-span-8 rounded-2xl overflow-hidden">
-            <ApparentWindSpeedChart />
-          </div>
-          <div className="col-span-8 rounded-2xl overflow-hidden grid grid-cols-1 gap-y-10">
-            {charts.map((chart) => (
-              <ChartTemplate
-                key={chart.fieldName} 
-                seriesData={chart.seriesData}
-                fieldName={chart.fieldName}
-                title={chart.title}
-              />
-            ))}
-          </div>
 
+
+        </div>
+        <div className="gap-y-10  w-full grid grid-cols-1 xl:grid-cols-2 gap-10">
+          {charts.map((chart) => (
+            <ChartTemplate
+              key={chart.fieldName}
+              seriesData={chart.seriesData}
+              fieldName={chart.fieldName}
+              title={chart.title}
+            />
+          ))}
         </div>
       </div>
     </PageContainer >

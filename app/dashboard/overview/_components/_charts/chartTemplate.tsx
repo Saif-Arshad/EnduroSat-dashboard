@@ -101,7 +101,7 @@ const ChartTemplate = ({ seriesData, fieldName, title }: any) => {
     ];
 
     return (
-        <div className="chart bg-neutral-800 p-2 rounded-2xl dark:text-black">
+        <div className="chart bg-neutral-800 p-2 rounded-2xl dark:text-black w-full">
             {/* Zoom Controls */}
             <div className="mb-4 flex space-x-2 mt-6">
                 <button
