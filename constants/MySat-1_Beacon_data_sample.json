@@ -12276,9 +12276,6 @@
     {
         "ID": 62015,
         "Timestamp": "3\/10\/2019 3:09:57",
-        "OBC_reset_counter": 19,
-        "OBC_uptime": 242906,
-        "EPS_battery_mode": 3,
         "OBC_time": "3\/10\/2019 3:09:56",
         "OBC_temp": 2,
         "OBC_DB_temp": 5,
@@ -12288,6 +12285,9 @@
         "TRXVU_temp": 4,
         "ADCS_temp": 12,
         "VTRXVU": 8.2,
+        "EPS_battery_mode": 3,
+        "OBC_uptime": 242906,
+        "OBC_reset_counter": 19,
         "Vbatt": 8.2
     },
     {
