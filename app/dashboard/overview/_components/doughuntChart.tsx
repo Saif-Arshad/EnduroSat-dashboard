@@ -32,7 +32,7 @@ const GaugeChart = () => {
                 <h3 className="text-lg font-semibold">System & Inertia</h3>
                 <button className="text-blue-400 hover:underline text-sm">More</button>
             </div>
-            <div className="relative h-48">
+            <div className="relative h-36 mb-3">
                 <Doughnut data={data} options={options} />
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <p className="text-lg font-semibold text-white">70%</p>
