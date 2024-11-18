@@ -13,6 +13,8 @@ import LineChart from './mainChart';
 import GaugeChart from './doughuntChart';
 import { getFirst400 } from '@/lib/getFirstData';
 import ChartTemplate from './_charts/chartTemplate';
+import LineChartComponent from './newChart';
+import LineChartNew from './newChart';
 
 
 export default function OverViewPage() {
@@ -117,7 +119,6 @@ export default function OverViewPage() {
             <div className="bg-neutral-800 text-white rounded-2xl p-6 shadow-lg w-full max-w-md">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-semibold">Ground Station</h3>
-                {/* <a href="#" className="text-blue-400 hover:underline">More</a> */}
               </div>
               <div className="flex items-center mb-4">
                 <img
@@ -238,6 +239,10 @@ export default function OverViewPage() {
           <div className="col-span-8">
             <SatelliteLineChart />
           </div>
+          <div className="col-span-8">
+            <LineChartNew />
+
+          </div>
           <div className="col-span-4 rounded-2xl overflow-hidden">
             <HistogramChart />
 
@@ -245,7 +250,6 @@ export default function OverViewPage() {
           <div className="col-span-4 rounded-2xl overflow-hidden">
             <ApparentWindSpeedChart />
 
-            <WindSpeedChart />
           </div>
 
           <div className="col-span-4 rounded-2xl overflow-hidden">
@@ -260,14 +264,14 @@ export default function OverViewPage() {
 
         </div>
         <div className="gap-y-10  w-full grid grid-cols-1 xl:grid-cols-2 gap-10">
-          {charts.map((chart) => (
+          {/* {charts.map((chart) => (
             <ChartTemplate
               key={chart.fieldName}
               seriesData={chart.seriesData}
               fieldName={chart.fieldName}
               title={chart.title}
             />
-          ))}
+          ))} */}
         </div>
       </div>
     </PageContainer >
