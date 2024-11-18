@@ -47,16 +47,16 @@ const GaugeChart2 = () => {
     };
 
     return (
-        <div className="   text-white flex">
+        <div className="   text-white flex flex-col gap-14">
 
-            <div className="relative h-36">
+            <div className="relative h-42">
                 <Doughnut data={data} options={options} />
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <p className="text-lg font-semibold text-white">21</p>
                     <p className="text-sm text-gray-400">Temperture</p>
                 </div>
             </div>
-            <div className="relative h-36">
+            <div className="relative h-42">
                 <Doughnut data={data2} options={options2} />
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <p className="text-lg font-semibold text-white">55</p>

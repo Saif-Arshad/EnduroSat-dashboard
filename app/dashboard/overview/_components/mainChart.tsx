@@ -58,7 +58,7 @@ const LineChart = () => {
         <div className="bg-neutral-800 text-white rounded-lg p-4 w-full">
             <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-semibold">Sensor 01-Humidity and Temperature</h3>
-                <button className="text-blue-400 hover:underline text-sm">More</button>
+                {/* <button className="text-blue-400 hover:underline text-sm">More</button> */}
             </div>
             <div className="h-48">
                 <Line data={data} options={options} />

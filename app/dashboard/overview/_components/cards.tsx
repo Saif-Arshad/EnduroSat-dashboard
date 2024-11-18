@@ -8,13 +8,13 @@ const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 const dummyData = {
     windSpeed: {
-        title: "Wind Speed",
-        value: "8 kn",
+        title: "OBC Reset Counter",
+        value: "15.824593542477674",
         data: [5, 6, 7, 8, 7, 6, 8, 9, 7, 6, 8, 9, 10, 7, 6, 8]
     },
     windAngle: {
-        title: "Wind Angle",
-        value: "-2°",
+        title: "OBC Uptime",
+        value: "459542.56354476756",
         data: [-1, 0, -2, -1, -2, 0, -2, -3, 0, -1, -2, -3, -1, 0, -2, -3]
     },
     outsideTemp: {
@@ -23,8 +23,8 @@ const dummyData = {
         data: [50, 52, 53, 51, 52, 53, 52, 54, 53, 51, 52, 54, 53, 52, 50, 51]
     },
     dewPoint: {
-        title: "Dewpoint",
-        value: "44°F",
+        title: "EPS Battery Mode",
+        value: "3.297000228990153",
         data: [42, 43, 44, 45, 44, 43, 44, 46, 44, 45, 43, 42, 43, 44, 45, 44]
     },
     barometricPressure: {
@@ -33,18 +33,18 @@ const dummyData = {
         data: [29.8, 29.9, 30, 29.95, 29.9, 29.85, 29.95, 30.1, 29.9, 29.8, 30, 29.95, 30.1, 29.9, 29.85, 29.95]
     },
     insideTemp: {
-        title: "Inside Temp",
-        value: "58°F",
+        title: "OBC Temp",
+        value: "4.484314174490497",
         data: [57, 58, 59, 57, 58, 59, 58, 60, 59, 58, 57, 58, 60, 59, 57, 58]
     },
     insideHumidity: {
-        title: "Inside Humidity",
-        value: "59%",
+        title: "EPS Battery Temp",
+        value: "2.8438287153652393",
         data: [60, 59, 58, 59, 60, 59, 58, 61, 59, 60, 58, 59, 61, 60, 58, 59]
     },
     engineRoomTemp: {
-        title: "Engine Room",
-        value: "51°F",
+        title: "OBC DB Temp",
+        value: "7.343943210441951",
         data: [50, 51, 52, 51, 50, 51, 52, 53, 51, 50, 52, 51, 53, 52, 50, 51]
     },
 };
