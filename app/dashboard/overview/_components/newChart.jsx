@@ -9,7 +9,7 @@ import { format, parse } from 'date-fns';
 const LineChartNew = () => {
     // Pagination state
     const [currentPage, setCurrentPage] = useState(1);
-    const pageSize = 50; 
+    const pageSize = 50;
     const totalPages = Math.ceil(data.length / pageSize);
 
     // Chart state
@@ -181,7 +181,7 @@ const LineChartNew = () => {
             </div>
 
             {/* Pagination Controls */}
-            <div className="flex justify-center items-center mt-6 space-x-4">
+            {/* <div className="flex justify-center items-center mt-6 space-x-4">
                 <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}
@@ -205,7 +205,7 @@ const LineChartNew = () => {
                     Next
                     <ChevronRight className="w-4 h-4 ml-2" />
                 </button>
-            </div>
+            </div> */}
 
             {/* Data Table */}
             {/* <div className="mt-8 overflow-x-auto">

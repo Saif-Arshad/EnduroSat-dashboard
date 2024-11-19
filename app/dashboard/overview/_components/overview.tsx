@@ -1,22 +1,28 @@
 "use client"
-import React, { useEffect, useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
-import { SatelliteLineChart } from './bar-graph';
-import MyInteractiveBarChart from './Line-Graph';
+import React, { useEffect, useState, memo } from 'react';
+import dynamic from 'next/dynamic';
 import PageContainer from '@/components/layout/page-container';
 import Card from './cards';
-import ApparentWindSpeedChart from './chart1';
-import WindSpeedChart from './chart2';
-import HistogramChart from './chart3';
-import GaugeChart2 from './mainChart3';
-import LineChart from './mainChart';
-import GaugeChart from './doughuntChart';
-import LineChartNew from './newChart';
-import MyBarChart from './_charts/paginatedChart';
-import MyNewLineChart from './newPaginatedChart';
-import OBCUptimeChart from './newPaginatedChart';
+const SatelliteLineChart = dynamic(() => import('./bar-graph'), { ssr: false });
+const MyInteractiveBarChart = dynamic(() => import('./Line-Graph'), { ssr: false });
+const ApparentWindSpeedChart = dynamic(() => import('./chart1'), { ssr: false });
+const WindSpeedChart = dynamic(() => import('./chart2'), { ssr: false });
+const HistogramChart = dynamic(() => import('./chart3'), { ssr: false });
+const GaugeChart2 = dynamic(() => import('./mainChart3'), { ssr: false });
+const LineChart = dynamic(() => import('./mainChart'), { ssr: false });
+const GaugeChart = dynamic(() => import('./doughuntChart'), { ssr: false });
+const MyBarChart = dynamic(() => import('./_charts/paginatedChart'), { ssr: false });
+// const MyNewLineChart = dynamic(() => import('./newPaginatedChart'), { ssr: false });
+const OBCUptimeChart = dynamic(() => import('./newPaginatedChart'), { ssr: false });
 
 
+const MemoizedSatelliteLineChart = memo(SatelliteLineChart);
+const MemoizedMyBarChart = memo(MyBarChart);
+const MemoizedOBCUptimeChart = memo(OBCUptimeChart);
+const MemoizedHistogramChart = memo(HistogramChart);
+const MemoizedApparentWindSpeedChart = memo(ApparentWindSpeedChart);
+const MemoizedMyInteractiveBarChart = memo(MyInteractiveBarChart);
+const MemoizedWindSpeedChart = memo(WindSpeedChart);
 export default function OverViewPage() {
   const [time, setTime] = useState({
     hours: 0,
@@ -180,39 +186,35 @@ export default function OverViewPage() {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7 my-6">
           <div className="col-span-8">
-            <SatelliteLineChart />
+            <MemoizedSatelliteLineChart />
           </div>
           <div className="col-span-8 2xl:col-span-4">
-            <MyBarChart />
+            <MemoizedMyBarChart />
 
           </div>
           <div className="col-span-8 2xl:col-span-4">
             {/* <LineChartNew /> */}
-            <OBCUptimeChart />
+            <MemoizedOBCUptimeChart />
 
 
           </div>
-          <div className="col-span-8 2xl:col-span-4">
-            <LineChartNew />
 
+          <div className="col-span-4 rounded-2xl overflow-hidden">
+            <MemoizedHistogramChart />
 
           </div>
           <div className="col-span-4 rounded-2xl overflow-hidden">
-            <HistogramChart />
-
-          </div>
-          <div className="col-span-4 rounded-2xl overflow-hidden">
-            <ApparentWindSpeedChart />
+            <MemoizedApparentWindSpeedChart />
 
           </div>
 
           <div className="col-span-4 rounded-2xl overflow-hidden">
 
-            <MyInteractiveBarChart />
+            <MemoizedMyInteractiveBarChart />
           </div>
           <div className="col-span-4 rounded-2xl overflow-hidden">
 
-            <WindSpeedChart />
+            <MemoizedWindSpeedChart />
           </div>
 
 

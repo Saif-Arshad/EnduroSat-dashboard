@@ -77,7 +77,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function SatelliteLineChart() {
+const SatelliteLineChart = () => {
   const [activeChart, setActiveChart] = useState<keyof typeof chartConfig>(
     "OBC_temp"
   );
@@ -242,3 +242,6 @@ export function SatelliteLineChart() {
     </Card>
   );
 }
+
+
+export default SatelliteLineChart;
