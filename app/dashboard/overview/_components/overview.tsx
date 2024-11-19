@@ -11,10 +11,8 @@ import HistogramChart from './chart3';
 import GaugeChart2 from './mainChart3';
 import LineChart from './mainChart';
 import GaugeChart from './doughuntChart';
-import { getFirst400 } from '@/lib/getFirstData';
-import ChartTemplate from './_charts/chartTemplate';
-import LineChartComponent from './newChart';
 import LineChartNew from './newChart';
+import MyBarChart from './_charts/paginatedChart';
 
 
 export default function OverViewPage() {
@@ -35,64 +33,7 @@ export default function OverViewPage() {
 
     return () => clearInterval(interval); // Clean up on component unmount
   }, []);
-  const data = getFirst400();
-  const charts = [
-    {
-      seriesData: data.map(item => item.OBC_reset_counter),
-      fieldName: "OBC_reset_counter",
-      title: "OBC Reset Counter"
-    },
-    {
-      seriesData: data.map(item => item.OBC_uptime),
-      fieldName: "OBC_uptime",
-      title: "OBC Uptime"
-    },
-    {
-      seriesData: data.map(item => item.EPS_battery_mode),
-      fieldName: "EPS_battery_mode",
-      title: "EPS Battery Mode"
-    },
-    {
-      seriesData: data.map(item => item.Vbatt),
-      fieldName: "Vbatt",
-      title: "Battery Voltage (Vbatt)"
-    },
-    {
-      seriesData: data.map(item => item.VTRXVU),
-      fieldName: "VTRXVU",
-      title: "VTRXVU Voltage"
-    },
-    {
-      seriesData: data.map(item => item.ADCS_temp),
-      fieldName: "ADCS_temp",
-      title: "ADCS Temperature"
-    },
-    {
-      seriesData: data.map(item => item.TRXVU_temp),
-      fieldName: "TRXVU_temp",
-      title: "TRXVU Temperature"
-    },
-    {
-      seriesData: data.map(item => item.ANTS_temp),
-      fieldName: "ANTS_temp",
-      title: "ANTS Temperature"
-    },
-    {
-      seriesData: data.map(item => item.EPS_boost1_temp),
-      fieldName: "EPS_boost1_temp",
-      title: "EPS Boost1 Temperature"
-    },
-    {
-      seriesData: data.map(item => item.EPS_battery_temp),
-      fieldName: "EPS_battery_temp",
-      title: "EPS Battery Temperature"
-    },
-    {
-      seriesData: data.map(item => item.OBC_temp),
-      fieldName: "OBC_DB_temp",
-      title: "OBC DB Temperature"
-    },
-  ];
+
   return (
     <PageContainer scrollable>
       <div className="py-5 ">
@@ -241,6 +182,10 @@ export default function OverViewPage() {
           </div>
           <div className="col-span-8">
             <LineChartNew />
+
+          </div>
+          <div className="col-span-8">
+            <MyBarChart />
 
           </div>
           <div className="col-span-4 rounded-2xl overflow-hidden">
