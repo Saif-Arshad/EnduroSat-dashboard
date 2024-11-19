@@ -47,12 +47,12 @@ export default function OverViewPage() {
       <div className="py-5 ">
         <div className="grid grid-cols-1 lg:grid-cols-6 xl:grid-cols-10 mb-12 gap-x-7">
           <div className="flex items-center flex-col gap-3 bg-neutral-800 rounded-3xl lg:row-span-2 lg:col-span-2 xl:col-span-3">
-            <div className="flex items-center p-4 rounded-2xl">
-              <img
+            <div className="flex items-center p-4 ">
+              {/* <img
                 src="/static/Images/sattelite_image.png"
                 alt="ah"
                 className="h-24 w-24"
-              />
+              /> */}
               <div className="flex flex-col ml-3">
                 <h2 className="text-3xl font-bold capitalize">HCT CubeSat-1</h2>
                 <h3 className="text-lg font-semibold capitalize">Space Satellite</h3>
