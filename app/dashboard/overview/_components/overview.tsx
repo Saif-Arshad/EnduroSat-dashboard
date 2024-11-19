@@ -127,7 +127,7 @@ export default function OverViewPage() {
                   className="h-16 w-16 mr-4"
                 />
                 <div>
-                  <h4 className="text-xl font-bold">ambasense01</h4>
+                  <h4 className="text-xl font-bold">EnduroSat</h4>
                   <p className="text-sm mt-3">
                     Lat/Long: <span className="text-gray-300">54.34076, -1.43523</span>
                   </p>
@@ -137,7 +137,7 @@ export default function OverViewPage() {
                 </div>
               </div>
               <div className="h-48 rounded-xl overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d72539.24429526621!2d-3.5470563886641595!3d55.37804981298806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x25a3b1142c791a9%3A0xc4f8a0433288257a!2sUnited%20Kingdom!5e0!3m2!1sen!2s!4v1731958960658!5m2!1sen!2s" width="600" height="450" loading="lazy" ></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13084027.934413005!2d-129.93406215977416!3d36.81030569411795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2s!4v1731991113552!5m2!1sen!2s" width="600" height="450" loading="lazy" ></iframe>
               </div>
 
             </div>
