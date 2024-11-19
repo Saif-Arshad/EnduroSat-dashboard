@@ -61,7 +61,7 @@ const OBCUptimeChart: React.FC = () => {
         <Card className='my-6 shadow-lg rounded-lg overflow-hidden'>
             <CardHeader className="flex items-center justify-between border-b p-4 bg-transparent">
                 <div className="flex flex-1 flex-col justify-center gap-1">
-                    <CardTitle className="text-xl font-semibold">OBC Uptime and Reset Counter Over Time</CardTitle>
+                    <CardTitle className="text-xl font-semibold text-center">OBC Uptime and Reset Counter Over Time</CardTitle>
                     <CardDescription className="text-gray-600">
                         Monitoring the uptime and number of resets of the On-Board Computer across cycles
                     </CardDescription>

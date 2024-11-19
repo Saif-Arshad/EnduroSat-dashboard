@@ -192,6 +192,11 @@ export default function OverViewPage() {
 
 
           </div>
+          <div className="col-span-8 2xl:col-span-4">
+            <LineChartNew />
+
+
+          </div>
           <div className="col-span-4 rounded-2xl overflow-hidden">
             <HistogramChart />
 

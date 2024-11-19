@@ -34,7 +34,7 @@ const MyLineChart = () => {
         <Card className='my-6 shadow-lg rounded-lg overflow-hidden'>
             <CardHeader className="flex items-center justify-between border-b p-4 bg-transparent">
                 <div className="flex flex-1 flex-col justify-center gap-1">
-                    <CardTitle className="text-xl font-semibold">Voltage and Temperature Trends by Cycle</CardTitle>
+                    <CardTitle className="text-xl font-semibold text-center">Voltage and Temperature Trends by Cycle</CardTitle>
                     <CardDescription className="text-gray-600">
                         Tracking Voltage Fluctuations and Temperature Changes Across Usage Cycles
                     </CardDescription>
@@ -158,9 +158,9 @@ const MyLineChart = () => {
                     />
                 </LineChart>
             </ResponsiveContainer>
-            <div className="text-center text-sm text-gray-500 p-4">
+            {/* <div className="text-center text-sm text-gray-500 p-4">
                 Page {pageIndex + 1} of {numberOfPages}
-            </div>
+            </div> */}
         </Card>
     );
 };
