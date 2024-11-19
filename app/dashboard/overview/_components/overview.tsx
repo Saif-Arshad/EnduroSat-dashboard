@@ -3,6 +3,7 @@ import React, { useEffect, useState, memo } from 'react';
 import dynamic from 'next/dynamic';
 import PageContainer from '@/components/layout/page-container';
 import Card from './cards';
+import InteractiveChart from '../../../../components/layout/InteractiveChart'
 const SatelliteLineChart = dynamic(() => import('./bar-graph'), { ssr: false });
 const MyInteractiveBarChart = dynamic(() => import('./Line-Graph'), { ssr: false });
 const ApparentWindSpeedChart = dynamic(() => import('./chart1'), { ssr: false });
@@ -189,15 +190,22 @@ export default function OverViewPage() {
             <MemoizedSatelliteLineChart />
           </div>
           <div className="col-span-8 2xl:col-span-4">
-            <MemoizedMyBarChart />
+
+            <InteractiveChart />
+
 
           </div>
           <div className="col-span-8 2xl:col-span-4">
-            {/* <LineChartNew /> */}
+            <MemoizedMyBarChart />
+
+          </div>
+          <div className="col-span-8 ">
+
             <MemoizedOBCUptimeChart />
 
 
           </div>
+
 
           <div className="col-span-4 rounded-2xl overflow-hidden">
             <MemoizedHistogramChart />
@@ -210,11 +218,10 @@ export default function OverViewPage() {
 
           <div className="col-span-4 rounded-2xl overflow-hidden">
 
-            <MemoizedMyInteractiveBarChart />
+            {/* <MemoizedMyInteractiveBarChart /> */}
           </div>
           <div className="col-span-4 rounded-2xl overflow-hidden">
-
-            <MemoizedWindSpeedChart />
+            {/* <MemoizedWindSpeedChart /> */}
           </div>
 
 
