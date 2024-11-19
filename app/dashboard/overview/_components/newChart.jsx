@@ -1,6 +1,7 @@
 import { getFirst400 } from '@/lib/getFirstData'; // Ensure this fetches your data correctly
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
+import data from '../../../../constants/MySat-1_Beacon_data_sample.json';
 
 const LineChartNew = () => {
     const [chartOptions, setChartOptions] = useState({});

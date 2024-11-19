@@ -13,6 +13,8 @@ import LineChart from './mainChart';
 import GaugeChart from './doughuntChart';
 import LineChartNew from './newChart';
 import MyBarChart from './_charts/paginatedChart';
+import MyNewLineChart from './newPaginatedChart';
+import OBCUptimeChart from './newPaginatedChart';
 
 
 export default function OverViewPage() {
@@ -180,12 +182,14 @@ export default function OverViewPage() {
           <div className="col-span-8">
             <SatelliteLineChart />
           </div>
-          <div className="col-span-8">
-            <LineChartNew />
+          <div className="col-span-8 2xl:col-span-4">
+            <MyBarChart />
 
           </div>
-          <div className="col-span-8">
-            <MyBarChart />
+          <div className="col-span-8 2xl:col-span-4">
+            {/* <LineChartNew /> */}
+            <OBCUptimeChart />
+
 
           </div>
           <div className="col-span-4 rounded-2xl overflow-hidden">
