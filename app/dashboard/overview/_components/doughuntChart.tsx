@@ -42,19 +42,19 @@ const GaugeChart = () => {
             <div className="text-sm">
                 <div className="flex justify-between mb-2">
                     <span>Accelerometer</span>
-                    <span>: 0x, 0y, 0z</span>
+                    <span>: 10x, 20y, 3z</span>
                 </div>
                 <div className="flex justify-between mb-2">
                     <span>Magnetometer</span>
-                    <span>: 0x, 0y, 0z</span>
+                    <span>: 5x, 10y, 10z</span>
                 </div>
                 <div className="flex justify-between mb-2">
                     <span>Gyroscope</span>
-                    <span>: 0x, 0y, 0z</span>
+                    <span>: 20x, 20y, 20z</span>
                 </div>
                 <div className="flex justify-between">
                     <span>RSSI</span>
-                    <span>: 0dB</span>
+                    <span>: 11dB</span>
                 </div>
             </div>
         </div>

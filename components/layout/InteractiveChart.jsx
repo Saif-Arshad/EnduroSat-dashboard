@@ -8,8 +8,8 @@ import stats from "../../constants/MySat-1_Beacon_data_sample.json";
 const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
 
 const InteractiveChart = () => {
-    const [chartType, setChartType] = useState("bar"); // Default to line chart (scatter mode)
-    const data = stats.slice(0, 250); // Limiting data for demo purposes
+    const [chartType, setChartType] = useState("scatter"); // Default to line chart (scatter mode)
+    const data = stats.slice(0, 50); // Limiting data for demo purposes
     const [zoomedData, setZoomedData] = useState(null); // Store zoomed data
 
     // Extract temperature fields for plotting

@@ -86,14 +86,14 @@ export default function OverViewPage() {
                   </p>
                 </div>
               </div>
-              <div className="h-48 rounded-xl overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13084027.934413005!2d-129.93406215977416!3d36.81030569411795!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!5e0!3m2!1sen!2s!4v1731991113552!5m2!1sen!2s" width="600" height="450" loading="lazy" ></iframe>
+              <div className="h-60 rounded-xl overflow-hidden">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d81828.0664209456!2d-119.48730146352074!3d36.77938654200673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!3m2!1d36.778261!2d-119.4179324!4m5!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia!3m2!1d36.778261!2d-119.4179324!5e0!3m2!1sen!2s!4v1732383538207!5m2!1sen!2s" width="600" height="450" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
               </div>
 
             </div>
             <div className="bg-neutral-800 text-white rounded-2xl p-6 shadow-lg w-full max-w-md">
               <h3 className="text-lg font-semibold mb-4">
-                Mission Clock/Countdown Clock
+                Mission time or clock
               </h3>
               <div className="text-center mb-6">
                 <h4 className="text-sm text-gray-400 mb-2">Countdown</h4>
@@ -106,19 +106,19 @@ export default function OverViewPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <h5 className="text-sm text-gray-400">Distance</h5>
-                  <p className="text-lg font-bold text-yellow-400">0KM</p>
+                  <p className="text-lg font-bold text-yellow-400">{String(time.hours).padStart(2, "0")} KM</p>
                 </div>
                 <div className="text-center">
                   <h5 className="text-sm text-gray-400">Current Speed</h5>
-                  <p className="text-lg font-bold text-yellow-400">0KM</p>
+                  <p className="text-lg font-bold text-yellow-400">{String(time.minutes).padStart(2, "0")}KM</p>
                 </div>
                 <div className="text-center">
                   <h5 className="text-sm text-gray-400">Sunset in</h5>
-                  <p className="text-lg font-bold text-yellow-400">MIN5</p>
+                  <p className="text-lg font-bold text-yellow-400"> {String(time.minutes).padStart(2, "0")} MIN</p>
                 </div>
                 <div className="text-center">
                   <h5 className="text-sm text-gray-400">Next Transmission in</h5>
-                  <p className="text-lg font-bold text-yellow-400">0 HOUR</p>
+                  <p className="text-lg font-bold text-yellow-400">{String(time.hours).padStart(2, "0")}  HOUR</p>
                 </div>
               </div>
             </div>
