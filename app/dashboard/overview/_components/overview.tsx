@@ -25,6 +25,8 @@ const MemoizedApparentWindSpeedChart = memo(ApparentWindSpeedChart);
 const MemoizedMyInteractiveBarChart = memo(MyInteractiveBarChart);
 const MemoizedWindSpeedChart = memo(WindSpeedChart);
 export default function OverViewPage() {
+  const [currentData, setCurrentData] = useState<any>([])
+  console.log("🚀 ~ OverViewPage ~ currentData:", currentData)
   const [time, setTime] = useState({
     hours: 0,
     minutes: 0,
@@ -43,6 +45,33 @@ export default function OverViewPage() {
     return () => clearInterval(interval); // Clean up on component unmount
   }, []);
 
+  const getSatelliteData = async () => {
+    try {
+      const response = await fetch(
+        "https://api.ground-station.endurosat.com/satellite-passes/06677517-e677-4f7a-9149-4ba645453acb",
+        {
+          headers: {
+            Authorization:
+              "Bearer MpL5FPEguHWQyfldjC7oad9n7ar3iAP5MtFtWQvRYBY6GS3tvKkb7rTJ6SmNqj-YPffn7SWI7n3TxZsVqucGbaQIvpSh5C6HuM7RuXJYY0P3N7Pv8jtQaccvJmY9RjxhDPvTizo6v8Ky9yDcI-ZjRNzN7rEYY4V16WmqbWp6JR3RllrmXJ-wQ0X_6G0vQGjyONLpvgVRZJoV4Ic-EWQFE-6lv9l4JH6ORkaPn_GqGL3BcT9BNZHkE7HXV2H72AbUor-yFUY6fuzNG4lR6iPROC7ZKVV86XPfGkFDGjHW6h-vfNtfUPt3CqvCkHZrfXS07I-i2-ca4CRwt9g2A",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setCurrentData(data)
+      return data;
+    } catch (error) {
+      console.error("Error fetching satellite data:", error);
+    }
+  };
+  useEffect(() => {
+    getSatelliteData()
+  }, [])
   return (
     <PageContainer scrollable>
       <div className="py-5 ">
