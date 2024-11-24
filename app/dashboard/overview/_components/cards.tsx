@@ -19,7 +19,7 @@ const dummyData = {
     },
     outsideTemp: {
         title: "Outside Temp",
-        value: "52°F",
+        value: "52°C",
         data: [50, 52, 53, 51, 52, 53, 52, 54, 53, 51, 52, 54, 53, 52, 50, 51]
     },
     dewPoint: {
