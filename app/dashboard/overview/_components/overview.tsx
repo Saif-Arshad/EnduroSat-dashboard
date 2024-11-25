@@ -25,7 +25,7 @@ const MemoizedApparentWindSpeedChart = memo(ApparentWindSpeedChart);
 const MemoizedMyInteractiveBarChart = memo(MyInteractiveBarChart);
 const MemoizedWindSpeedChart = memo(WindSpeedChart);
 export default function OverViewPage() {
-  const [currentData, setCurrentData] = useState<any>([])
+  const [currentData, setCurrentData] = useState<any>(null)
   console.log("🚀 ~ OverViewPage ~ currentData:", currentData)
   const [time, setTime] = useState({
     hours: 0,
@@ -45,14 +45,15 @@ export default function OverViewPage() {
     return () => clearInterval(interval); // Clean up on component unmount
   }, []);
 
-  const getSatelliteData = async () => {
+  const getSatelliteData = async (accessToken: any) => {
+    console.log("🚀 ~ getSatelliteData ~ accessToken:", accessToken)
     try {
       const response = await fetch(
         "https://api.ground-station.endurosat.com/satellite-passes/06677517-e677-4f7a-9149-4ba645453acb",
         {
           headers: {
             Authorization:
-              "Bearer MpL5FPEguHWQyfldjC7oad9n7ar3iAP5MtFtWQvRYBY6GS3tvKkb7rTJ6SmNqj-YPffn7SWI7n3TxZsVqucGbaQIvpSh5C6HuM7RuXJYY0P3N7Pv8jtQaccvJmY9RjxhDPvTizo6v8Ky9yDcI-ZjRNzN7rEYY4V16WmqbWp6JR3RllrmXJ-wQ0X_6G0vQGjyONLpvgVRZJoV4Ic-EWQFE-6lv9l4JH6ORkaPn_GqGL3BcT9BNZHkE7HXV2H72AbUor-yFUY6fuzNG4lR6iPROC7ZKVV86XPfGkFDGjHW6h-vfNtfUPt3CqvCkHZrfXS07I-i2-ca4CRwt9g2A",
+              `Bearer ${accessToken}`,
           },
         }
       );
@@ -70,7 +71,48 @@ export default function OverViewPage() {
     }
   };
   useEffect(() => {
-    getSatelliteData()
+    const payload: any = {
+      username: "hctsat-datauser@hct.ac.ae",
+      password: "HCTdatauser@123",
+      client_id: "7qgiaitv90g4vmq8e9rpnlgtim",
+      refresh_token: "",
+      grant_type: "password"
+    };
+
+    const getToken = async () => {
+      try {
+        const formData = new URLSearchParams();
+        Object.keys(payload).forEach(key => {
+          formData.append(key, payload[key]);
+        });
+
+        const response = await fetch("https://api.ground-station.endurosat.com/oauth2/token", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: formData.toString()
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Access Token Response:", data);
+        console.log("Access Token Response:", data.access_token);
+        return data.access_token
+      } catch (error) {
+        console.error("Error fetching the token:", error);
+      }
+    };
+    const getAccess = async () => {
+
+
+      const accessToken = await getToken()
+      getSatelliteData(accessToken)
+    }
+    getAccess()
   }, [])
   return (
     <PageContainer scrollable>
@@ -154,7 +196,91 @@ export default function OverViewPage() {
           </div>
         </div>
 
-        <div className='bg-neutral-800 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 rounded-2xl mb-20 gap-y-10'>
+        {
+          currentData &&
+          <div className='bg-neutral-800 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 p-8 rounded-2xl mb-20 gap-y-10'>
+
+            <span className='flex items-center flex-col lg:col-span-2 lg:row-span-2'>
+              <h3 className='mb-3 font-semibold capitalize'>
+                Satellite
+              </h3>
+              <h2 className='text-2xl font-bold capitalize'>
+                {currentData.satellite}
+              </h2>
+            </span>
+            <span className='flex items-center flex-col lg:col-span-2 lg:row-span-2'>
+
+              <h3 className='mb-3 font-semibold capitalize'>
+
+                AOS
+              </h3>
+              <h2 className='text-2xl font-bold capitalize'>
+                {currentData.aos}
+              </h2>
+            </span>
+            <span className='flex items-center flex-col lg:col-span-2 lg:row-span-2'>
+
+              <h3 className='mb-3 font-semibold capitalize'>
+
+                Ground Station
+              </h3>
+              <h2 className='text-2xl font-bold capitalize'>
+                {currentData.groundStation}
+              </h2>
+            </span>
+            <span className='flex items-center flex-col lg:col-span-2 lg:row-span-2'>
+
+              <h3 className='mb-3 font-semibold capitalize'>
+
+                LOS
+              </h3>
+              <h2 className='text-2xl font-bold capitalize'>
+                {currentData.los}
+              </h2>
+            </span>
+            <span className='flex items-center flex-col lg:col-span-2 lg:row-span-2'>
+
+              <h3 className='mb-3 font-semibold capitalize'>
+
+                Status
+              </h3>
+              <h2 className='text-2xl font-bold capitalize'>
+                {currentData.status}
+              </h2>
+            </span>
+            <span className='flex items-center flex-col lg:col-span-2 lg:row-span-2'>
+
+              <h3 className='mb-3 font-semibold capitalize'>
+
+                Max Elevation
+              </h3>
+              <h2 className='text-2xl font-bold capitalize'>
+                {currentData.maxElevation}
+              </h2>
+            </span>
+            <span className='flex items-center flex-col lg:col-span-3 lg:row-span-3'>
+
+              <h3 className='mb-3 font-semibold capitalize'>
+
+                Tle 1
+              </h3>
+              <h2 className='text-xl font-bold capitalize'>
+                {currentData.tle1}
+              </h2>
+            </span>
+            <span className='flex items-center flex-col lg:col-span-3 lg:row-span-3'>
+
+              <h3 className='mb-3 font-semibold capitalize'>
+
+                Tle 2
+              </h3>
+              <h2 className='text-xl font-bold capitalize'>
+                {currentData.tle2}
+              </h2>
+            </span>
+          </div>
+        }
+        {/* <div className='bg-neutral-800 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 rounded-2xl mb-20 gap-y-10'>
 
           <span className='flex items-center flex-col'>
             <h3 className='mb-3 font-semibold capitalize'>
@@ -209,7 +335,7 @@ export default function OverViewPage() {
               2019-07-26 01:17:33
             </h2>
           </span>
-        </div>
+        </div> */}
 
 
         <Card />
