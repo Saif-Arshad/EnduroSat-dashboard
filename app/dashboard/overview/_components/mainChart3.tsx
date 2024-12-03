@@ -49,20 +49,14 @@ const GaugeChart2 = () => {
     return (
         <div className="   text-white flex flex-col gap-14 2xl:flex-row">
 
-            <div className="relative h-42">
+            <div className="relative h-56">
                 <Doughnut data={data} options={options} />
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <p className="text-lg font-semibold text-white">21</p>
-                    <p className="text-sm text-gray-400">Temperture</p>
+                    <p className="text-2xl font-semibold text-white">21</p>
+                    <p className="text-lg text-gray-400">Temperture</p>
                 </div>
             </div>
-            <div className="relative h-42">
-                <Doughnut data={data2} options={options2} />
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <p className="text-lg font-semibold text-white">55</p>
-                    <p className="text-sm text-gray-400">Humidity</p>
-                </div>
-            </div>
+
         </div>
     );
 };

@@ -3,6 +3,8 @@ import React, { useEffect, useState, memo } from 'react';
 import dynamic from 'next/dynamic';
 import PageContainer from '@/components/layout/page-container';
 import Card from './cards';
+import PieChart from './newChart2.jsx'
+import BarChart from './newChart3'
 import InteractiveChart from '../../../../components/layout/InteractiveChart'
 const SatelliteLineChart = dynamic(() => import('./bar-graph'), { ssr: false });
 const MyInteractiveBarChart = dynamic(() => import('./Line-Graph'), { ssr: false });
@@ -127,7 +129,7 @@ export default function OverViewPage() {
               /> */}
               <div className="flex flex-col ml-3">
                 <h2 className="text-3xl font-bold capitalize">HCT CubeSat-1</h2>
-                <h3 className="text-lg font-semibold capitalize">Space Satellite</h3>
+                <h3 className="text-lg font-semibold capitalize">Satellite</h3>
               </div>
             </div>
             <GaugeChart />
@@ -150,7 +152,7 @@ export default function OverViewPage() {
                 <div>
                   <h4 className="text-xl font-bold">EnduroSat</h4>
                   <p className="text-sm mt-3">
-                    Lat/Long: <span className="text-gray-300">54.34076, -1.43523</span>
+                    Lat/Long: <span className="text-gray-300">42.6603029 N,  23.284007 E</span>
                   </p>
                   <p className="text-sm mt-3">
                     Last Seen: <span className="text-gray-300">30th May 2020</span>
@@ -158,7 +160,8 @@ export default function OverViewPage() {
                 </div>
               </div>
               <div className="h-60 rounded-xl overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d81828.0664209456!2d-119.48730146352074!3d36.77938654200673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!3m2!1d36.778261!2d-119.4179324!4m5!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia!3m2!1d36.778261!2d-119.4179324!5e0!3m2!1sen!2s!4v1732383538207!5m2!1sen!2s" width="600" height="450" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d25678.628924030276!2d23.302563130098882!3d42.69970448884887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e0!4m0!4m5!1s0x40aa8682cb317bf5%3A0x400a01269bf5e60!2sSofia%2C%20Bulgaria!3m2!1d42.6977082!2d23.3218675!5e0!3m2!1sen!2s!4v1733226455494!5m2!1sen!2s" width="600" height="450" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                {/* <iframe src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d81828.0664209456!2d-119.48730146352074!3d36.77938654200673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia%2C%20USA!3m2!1d36.778261!2d-119.4179324!4m5!1s0x808fb9fe5f285e3d%3A0x8b5109a227086f55!2sCalifornia!3m2!1d36.778261!2d-119.4179324!5e0!3m2!1sen!2s!4v1732383538207!5m2!1sen!2s" width="600" height="450" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe> */}
               </div>
 
             </div>
@@ -258,26 +261,7 @@ export default function OverViewPage() {
                 {currentData.maxElevation}
               </h2>
             </span>
-            <span className='flex items-center flex-col lg:col-span-3 lg:row-span-3'>
 
-              <h3 className='mb-3 font-semibold capitalize'>
-
-                Tle 1
-              </h3>
-              <h2 className='text-xl font-bold capitalize'>
-                {currentData.tle1}
-              </h2>
-            </span>
-            <span className='flex items-center flex-col lg:col-span-3 lg:row-span-3'>
-
-              <h3 className='mb-3 font-semibold capitalize'>
-
-                Tle 2
-              </h3>
-              <h2 className='text-xl font-bold capitalize'>
-                {currentData.tle2}
-              </h2>
-            </span>
           </div>
         }
         {/* <div className='bg-neutral-800 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-8 rounded-2xl mb-20 gap-y-10'>
@@ -363,12 +347,13 @@ export default function OverViewPage() {
 
 
           <div className="col-span-4 rounded-2xl overflow-hidden">
-            <MemoizedHistogramChart />
+            {/* <MemoizedHistogramChart /> */}
+            <PieChart />
 
           </div>
           <div className="col-span-4 rounded-2xl overflow-hidden">
-            <MemoizedApparentWindSpeedChart />
-
+            {/* <MemoizedApparentWindSpeedChart /> */}
+            <BarChart />
           </div>
 
           <div className="col-span-4 rounded-2xl overflow-hidden">
