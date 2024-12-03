@@ -14,7 +14,7 @@ const ScatterChart = () => {
     // Layout state for persistent zoom
     const [layout, setLayout] = useState({
         title: {
-            text: 'ADCS Over Time',
+            text: 'ADCS Temperture',
             font: { color: '#ffffff' },
         },
         xaxis: { title: 'Data Points' },

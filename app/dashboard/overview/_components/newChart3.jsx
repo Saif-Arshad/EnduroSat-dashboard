@@ -4,12 +4,32 @@ import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
 import stats from "../../../../constants/MySat-1_Beacon_data_sample.json";
 
-const BarChart = () => {
-    const slicedData = stats.slice(0, 30);
+const LineChart = () => {
+    const slicedData = stats.slice(0, 50);
 
-    // Prepare data
-    const x = ['VTRXVU', 'Vbatt']; // Categories
-    const y = [slicedData[0]?.VTRXVU || 0, slicedData[0]?.Vbatt || 0]; // Values
+    // Prepare data for multiple lines
+    const data = [
+        {
+            x: Array.from({ length: slicedData.length }, (_, i) => `Data ${i + 1}`), // Dynamic x-axis labels
+            y: slicedData.map((item) => item.VTRXVU || 0), // First metric
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'VTRXVU', // Legend label
+            line: {
+                color: '#636efa', // Line color
+            },
+        },
+        {
+            x: Array.from({ length: slicedData.length }, (_, i) => `Data ${i + 1}`), // Dynamic x-axis labels
+            y: slicedData.map((item) => item.TRXVU_temp || 0), // Second metric
+            type: 'scatter',
+            mode: 'lines+markers',
+            name: 'TRXVU', // Legend label
+            line: {
+                color: '#ef553b', // Line color
+            },
+        },
+    ];
 
     // Layout state for persistent zoom
     const [layout, setLayout] = useState({
@@ -18,7 +38,7 @@ const BarChart = () => {
             font: { color: '#ffffff' },
         },
         xaxis: {
-            title: 'Metrics',
+            title: 'Data Points',
         },
         yaxis: {
             title: 'Values',
@@ -26,22 +46,12 @@ const BarChart = () => {
         paper_bgcolor: '#1f1f1f', // Dark mode background
         plot_bgcolor: '#1f1f1f', // Dark mode plot area
         font: { color: '#ffffff' },
-        barmode: 'group', // Grouped bars
     });
 
     return (
         <div>
             <Plot
-                data={[
-                    {
-                        x: x,
-                        y: y,
-                        type: 'bar',
-                        marker: {
-                            color: ['#636efa', '#ef553b'], // Custom bar colors
-                        },
-                    },
-                ]}
+                data={data} // Pass multiple datasets
                 layout={layout}
                 config={{
                     responsive: true,
@@ -60,4 +70,4 @@ const BarChart = () => {
     );
 };
 
-export default BarChart;
+export default LineChart;
